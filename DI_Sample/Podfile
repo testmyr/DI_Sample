@@ -1,0 +1,5 @@
+platform :ios, '11.0'
+
+target 'DI_SampleTests' do
+pod 'Swinject'
+end
