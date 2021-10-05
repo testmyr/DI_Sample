@@ -34,11 +34,15 @@ class ReposListPresenter {
     }
     func start(completion: (()->Void)? = nil) {
         let _ = dataPump.fetch(pageWithIndex: 1) { [weak self] response in
-            if let models = response?.reposArray, models.count > 0 {
-                self?.models = models.map({RepoModel(name: $0.name, description: $0.description)})
-                self?.view.updateView()
-            } else if let errorInfo = response?.errorMessage {
-                self?.view.showErrorAlert(errorText: errorInfo.message)
+            if let weakSelf = self {
+                if let newlyFetchedModels = response?.reposArray, newlyFetchedModels.count > 0 {
+                    weakSelf.models = newlyFetchedModels.map({RepoModel(name: $0.name, description: $0.description)})
+                    weakSelf.reachedTheEndOfList = newlyFetchedModels.count < weakSelf.numberOfReposPerPage
+                    weakSelf.view.updateView()
+                } else if let errorInfo = response?.errorMessage {
+                    weakSelf.view.showErrorAlert(errorText: errorInfo.message)
+                }
+                completion?()
             }
         }
     }
