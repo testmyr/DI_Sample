@@ -33,10 +33,16 @@ class Networking: NetworkingProtocol {
     
     func request(pageWithSize pageSize: Int, andIndex pageIndex: Int, endPoint: Endpoint, completion: @escaping CompletionHandler) -> OperationQueue? {
         assert(pageIndex > 0)
-        guard let url = URL(string: endPoint.path) else { return nil }
-        if queue.containsZeroPageOperation() {
-            completion(nil, true)
+        if pageIndex == 0 {
+            // if it is eg a refresh the previous data isn't needed already
+            queue.cancelAllOperations()
         }
+        guard let url = URL(string: endPoint.path) else { return nil }
+        // might be used in order not to get the data and not to update UI because of due refresh
+//        if queue.containsZeroPageOperation() {
+//            completion(nil, true)
+//            return
+//        }
         var request = createRequest(forUrl: url, withPageSize: pageSize, andPageIndex: pageIndex)
         request.timeoutInterval = 10
         let operation = AsyncWebOperationDataTask(with: request) { success, data, _ in
