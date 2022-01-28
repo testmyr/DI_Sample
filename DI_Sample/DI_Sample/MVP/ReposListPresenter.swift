@@ -17,7 +17,7 @@ protocol ReposListVCProtocol: AnyObject {
 }
 
 class ReposListPresenter {
-    weak var view: ReposListVCProtocol!
+    weak var view: ReposListVCProtocol?
     var numberOfModels: Int {
         return models.count
     }
@@ -39,13 +39,13 @@ class ReposListPresenter {
                     if newlyFetchedModels.count > 0 {
                         weakSelf.models = newlyFetchedModels.map({RepoModel(name: $0.name, description: $0.description)})
                         weakSelf.reachedTheEndOfList = newlyFetchedModels.count < weakSelf.numberOfReposPerPage
-                        weakSelf.view.updateView()
+                        weakSelf.view?.updateView()
                     } else {
-                        weakSelf.view.showErrorAlert(errorText: "No repositories.")
+                        weakSelf.view?.showErrorAlert(errorText: "No repositories.")
                         weakSelf.reachedTheEndOfList = true
                     }
                 } else if let errorInfo = response?.errorMessage {
-                    weakSelf.view.showErrorAlert(errorText: errorInfo.message)
+                    weakSelf.view?.showErrorAlert(errorText: errorInfo.message)
                 }
                 completion?()
             }
@@ -76,7 +76,7 @@ class ReposListPresenter {
                             weakSelf.reachedTheEndOfList = true
                         }
                     } else if let errorInfo = response?.errorMessage {
-                        weakSelf.view.showErrorAlert(errorText: errorInfo.message)
+                        weakSelf.view?.showErrorAlert(errorText: errorInfo.message)
                     }
                 })
                 
