@@ -10,7 +10,7 @@ import Foundation
 import Foundation
 
 protocol DataParserProtocol {
-    func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void) -> OperationQueue?
+    func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void)
 }
 
 class DataParser: DataParserProtocol {
@@ -25,8 +25,8 @@ class DataParser: DataParserProtocol {
         self.pageSize = pageSize
     }
     
-    func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void) -> OperationQueue? {
-        return networking.request(pageWithSize: pageSize, andIndex: pageIndex, endPoint: repos) { data, success in
+    func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void) {
+        networking.request(pageWithSize: pageSize, andIndex: pageIndex, endPoint: repos) { data, success in
             if !success {
                 response(nil)
             }
