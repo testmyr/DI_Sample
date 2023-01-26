@@ -18,7 +18,7 @@ extension RepoResponse {
 }
 extension Response {
     init(modelNetworking: RepoResponse) {
-        reposArray = [modelNetworking]
+        reposes = [modelNetworking]
         errorMessage = nil
     }
 }
@@ -52,8 +52,8 @@ class DI_SampleTests: XCTestCase {
 
     func testResponse() {
         let response = container.resolve(Response.self)!
-        XCTAssertNotNil(response.reposArray)
-        XCTAssertEqual(response.reposArray![0].name, testReposName)
-        XCTAssertEqual(response.reposArray![0].description, testReposDescription)
+        XCTAssertNotNil(response.reposes)
+        XCTAssertEqual(response.reposes![0].name, testReposName)
+        XCTAssertEqual(response.reposes![0].description, testReposDescription)
     }
 }

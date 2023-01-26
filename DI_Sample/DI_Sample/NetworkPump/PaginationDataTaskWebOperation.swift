@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Is finished only after its 'completion' closure execution
+/// Is finished as soon as its 'completion' closure is executed
 class PaginationDataTaskWebOperation: WebOperation {
 
     var task: URLSessionDataTask?

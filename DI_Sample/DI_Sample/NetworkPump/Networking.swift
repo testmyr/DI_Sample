@@ -35,6 +35,8 @@ class Networking: NetworkingProtocol {
             queue.cancelAllOperations()
         }
         let reposEndPoint = ReposesEndPoint(org: org, pageIndex: pageIndex, pageSize: pageSize)
+        
+        // could be moved into a separate func in case of others paginations-queues
         guard let url = reposEndPoint.url else { return }
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringCacheData

@@ -8,21 +8,21 @@
 import Foundation
 
 struct Response: Decodable {
-  let reposArray: [RepoResponse]?
+  let reposes: [RepoResponse]?
   let errorMessage: ErrorInfo?
     
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         do {
-            reposArray = try container.decode([RepoResponse].self)
+            reposes = try container.decode([RepoResponse].self)
             errorMessage = nil
         } catch let error {
             guard let errorMessage = try? container.decode(ErrorInfo.self) else {
                 throw error
             }
             self.errorMessage = errorMessage
-            reposArray = nil
+            reposes = nil
         }
     }
 }

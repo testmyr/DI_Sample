@@ -36,7 +36,7 @@ class ReposListPresenter {
     func start(completion: (()->Void)? = nil) {
         let _ = dataPump.fetch(pageWithIndex: 1) { [weak self] response in
             if let self {
-                if let newlyFetchedModels = response?.reposArray {
+                if let newlyFetchedModels = response?.reposes {
                     self.pageIndex = 0
                     if newlyFetchedModels.count > 0 {
                         self.models = newlyFetchedModels.map({RepoModel(name: $0.name, description: $0.description)})
@@ -68,7 +68,7 @@ class ReposListPresenter {
         pageIndex = duePageIndex
         dataPump.fetch(pageWithIndex: duePageIndex) { [weak self] response in
             if let self {
-                if let models = response?.reposArray {
+                if let models = response?.reposes {
                     if models.count > 0 {
                         let newlyFetchedModels = models.map({RepoModel(name: $0.name, description: $0.description)})
                         self.models.append(contentsOf: newlyFetchedModels)
