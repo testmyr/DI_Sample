@@ -1,5 +1,5 @@
 //
-//  RepoModelNetworking.swift
+//  RepoResponse.swift
 //  DI_Sample
 //
 //  Created by sdk on 30.09.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RepoModelNetworking: Codable {
+struct RepoResponse: Codable {
     var name: String
     var description: String?
     

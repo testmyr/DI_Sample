@@ -9,24 +9,22 @@ import Foundation
 
 import Foundation
 
-protocol DataParserProtocol {
+protocol DataProviderProtocol {
     func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void)
 }
 
-class DataParser: DataParserProtocol {
+class DataParser: DataProviderProtocol {
     private let networking: NetworkingProtocol
-    private let repos: Endpoint
     
     private let pageSize: Int
     
-    init(networking: NetworkingProtocol, repos: Endpoint, pageSize: Int) {
+    init(networking: NetworkingProtocol, pageSize: Int) {
         self.networking = networking
-        self.repos = repos
         self.pageSize = pageSize
     }
     
     func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void) {
-        networking.request(pageWithSize: pageSize, andIndex: pageIndex, endPoint: repos) { data, success in
+        networking.requestReposPage(withSize: pageSize, andIndex: pageIndex) { data, success in
             if !success {
                 response(nil)
             }

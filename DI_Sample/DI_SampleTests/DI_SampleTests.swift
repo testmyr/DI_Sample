@@ -10,14 +10,14 @@ import Swinject
 
 @testable import DI_Sample
 
-extension RepoModelNetworking {
+extension RepoResponse {
     init(model: RepoModel) {
         name = model.name
         description = model.description
     }
 }
 extension Response {
-    init(modelNetworking: RepoModelNetworking) {
+    init(modelNetworking: RepoResponse) {
         reposArray = [modelNetworking]
         errorMessage = nil
     }
@@ -35,12 +35,12 @@ class DI_SampleTests: XCTestCase {
         container.register(RepoModel.self) { resolver in
             return RepoModel(name: self.testReposName, description: self.testReposDescription)
         }
-        container.register(RepoModelNetworking.self) { resolver in
+        container.register(RepoResponse.self) { resolver in
             let model = resolver.resolve(RepoModel.self)!
-            return RepoModelNetworking(model: model)
+            return RepoResponse(model: model)
         }
         container.register(Response.self) { resolver in
-          let modelNetworking = resolver.resolve(RepoModelNetworking.self)!
+          let modelNetworking = resolver.resolve(RepoResponse.self)!
           return Response(modelNetworking: modelNetworking)
         }
     }

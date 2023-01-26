@@ -22,30 +22,32 @@ class ReposListPresenter {
         return models.count
     }
     private(set) var models = [RepoModel]()
-    private let dataPump: DataParserProtocol
+    private let dataPump: DataProviderProtocol
     
-    private let numberOfReposPerPage: Int
-    private var reachedTheEndOfList = false
+    private let pageSize: Int
+    private var pageIndex = 0
+    private var isEndOfReposes = false
     
-    init(vc: ReposListVCProtocol, endPoint: Endpoint, networking: NetworkingProtocol, numberOfReposPerPage: Int = 30) {
+    init(vc: ReposListVCProtocol, networking: NetworkingProtocol, pageSize: Int = 30) {
         view = vc
-        dataPump = DataParser(networking: networking, repos: endPoint, pageSize: numberOfReposPerPage)
-        self.numberOfReposPerPage = numberOfReposPerPage
+        dataPump = DataParser(networking: networking, pageSize: pageSize)
+        self.pageSize = pageSize
     }
     func start(completion: (()->Void)? = nil) {
         let _ = dataPump.fetch(pageWithIndex: 1) { [weak self] response in
-            if let weakSelf = self {
+            if let self {
                 if let newlyFetchedModels = response?.reposArray {
+                    self.pageIndex = 0
                     if newlyFetchedModels.count > 0 {
-                        weakSelf.models = newlyFetchedModels.map({RepoModel(name: $0.name, description: $0.description)})
-                        weakSelf.reachedTheEndOfList = newlyFetchedModels.count < weakSelf.numberOfReposPerPage
-                        weakSelf.view?.updateView()
+                        self.models = newlyFetchedModels.map({RepoModel(name: $0.name, description: $0.description)})
+                        self.isEndOfReposes = newlyFetchedModels.count < self.pageSize
+                        self.view?.updateView()
                     } else {
-                        weakSelf.view?.showErrorAlert(errorText: "No repositories.")
-                        weakSelf.reachedTheEndOfList = true
+                        self.view?.showErrorAlert(errorText: "No repositories.")
+                        self.isEndOfReposes = true
                     }
                 } else if let errorInfo = response?.errorMessage {
-                    weakSelf.view?.showErrorAlert(errorText: errorInfo.message)
+                    self.view?.showErrorAlert(errorText: errorInfo.message)
                 }
                 completion?()
             }
@@ -57,24 +59,26 @@ class ReposListPresenter {
     }
     
     func getNextPage() {
-        guard !reachedTheEndOfList else {
+        guard !isEndOfReposes else {
             return
         }
         
-        let duePageIndex = models.count / numberOfReposPerPage + 1
+        let duePageIndex = models.count / pageSize + 1
+        guard duePageIndex > pageIndex else { return }
+        pageIndex = duePageIndex
         dataPump.fetch(pageWithIndex: duePageIndex) { [weak self] response in
-            if let weakSelf = self {
+            if let self {
                 if let models = response?.reposArray {
                     if models.count > 0 {
                         let newlyFetchedModels = models.map({RepoModel(name: $0.name, description: $0.description)})
-                        weakSelf.models.append(contentsOf: newlyFetchedModels)
-                        weakSelf.reachedTheEndOfList = newlyFetchedModels.count < weakSelf.numberOfReposPerPage
-                        self?.view?.updateViewSync()
+                        self.models.append(contentsOf: newlyFetchedModels)
+                        self.isEndOfReposes = newlyFetchedModels.count < self.pageSize
+                        self.view?.updateViewSync()
                     } else {
-                        weakSelf.reachedTheEndOfList = true
+                        self.isEndOfReposes = true
                     }
                 } else if let errorInfo = response?.errorMessage {
-                    weakSelf.view?.showErrorAlert(errorText: errorInfo.message)
+                    self.view?.showErrorAlert(errorText: errorInfo.message)
                 }
             }
         }

@@ -1,5 +1,5 @@
 //
-//  AsyncWebOperation.swift
+//  WebOperation.swift
 //  DI_Sample
 //
 //  Created by sdk on 30.09.2021.
@@ -8,9 +8,7 @@
 import Foundation
 
 
-class AsyncWebOperation: Operation {
-    var pageIndex: Int?
-    
+class WebOperation: Operation {
     enum State: String {
         case ready
         case executing

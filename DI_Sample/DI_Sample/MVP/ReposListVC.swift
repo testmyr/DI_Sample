@@ -96,11 +96,13 @@ extension ReposListVC: ReposListVCProtocol {
         }
     }
     func showErrorAlert(errorText: String) {
-        let alert = UIAlertController(title: "Oops...", message: errorText, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
-            self?.refreshControl.endRefreshing()
-        })
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.sync {
+            let alert = UIAlertController(title: "Oops...", message: errorText, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+                self?.refreshControl.endRefreshing()
+            })
+            present(alert, animated: true, completion: nil)
+        }
     }
     func showAnimation() {
         DispatchQueue.main.async {

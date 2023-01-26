@@ -1,5 +1,5 @@
 //
-//  AsyncWebOperationDataTask.swift
+//  PaginationDataTaskWebOperation.swift
 //  DI_Sample
 //
 //  Created by sdk on 30.09.2021.
@@ -7,23 +7,23 @@
 
 import Foundation
 
-/// is finished only after its 'completion' closure execution
-class AsyncWebOperationDataTask: AsyncWebOperation {
+/// Is finished only after its 'completion' closure execution
+class PaginationDataTaskWebOperation: WebOperation {
 
     var task: URLSessionDataTask?
     var completion: ((Bool, Data?) -> ())!
 
-    init(with request: URLRequest, andComletion completion_: @escaping (Bool, Data?, AsyncWebOperationDataTask) -> ()) {
+    init(with request: URLRequest, andComletion completion_: @escaping (Bool, Data?) -> ()) {
         super.init()
         self.name = request.url?.path
         let finishCompletion = {
-            completion_(false, nil, self)
+            completion_(false, nil)
             self.state = .finished
         }
         completion = { [weak self] success, data in
-            completion_(success, data, self!)
-            if let weakSelf = self {
-                weakSelf.state = .finished
+            completion_(success, data)
+            if let self {
+                self.state = .finished
             }
         }
         task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
@@ -67,8 +67,4 @@ class AsyncWebOperationDataTask: AsyncWebOperation {
             }
         }
     }
-    
-//    deinit {
-//        print("YEAP")
-//    }
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 struct Response: Decodable {
-  let reposArray: [RepoModelNetworking]?
+  let reposArray: [RepoResponse]?
   let errorMessage: ErrorInfo?
     
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         do {
-            reposArray = try container.decode([RepoModelNetworking].self)
+            reposArray = try container.decode([RepoResponse].self)
             errorMessage = nil
         } catch let error {
             guard let errorMessage = try? container.decode(ErrorInfo.self) else {

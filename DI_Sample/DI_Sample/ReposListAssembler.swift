@@ -19,9 +19,8 @@ extension ReposListAssemblerProtocol {
         return reposView
     }
     func resolve(org: String, view: ReposListVCProtocol) -> ReposListPresenter {
-        let endPoint = GithubRepos(org: org)
-        let networking = Networking()
-        return ReposListPresenter(vc: view, endPoint: endPoint, networking: networking)
+        let networking = Networking(org: org)
+        return ReposListPresenter(vc: view, networking: networking)
     }
 }
 
