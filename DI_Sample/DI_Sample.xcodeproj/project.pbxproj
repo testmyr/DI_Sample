@@ -58,6 +58,12 @@
 		5A5829472705620B007CAB8F /* WebOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5829462705620B007CAB8F /* WebOperation.swift */; };
 		5A5829482705620B007CAB8F /* WebOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5829462705620B007CAB8F /* WebOperation.swift */; };
 		5A5829492705620B007CAB8F /* WebOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5829462705620B007CAB8F /* WebOperation.swift */; };
+		5A5FAA0329846549000580D4 /* ReposListAssemblerStubInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FAA0229846549000580D4 /* ReposListAssemblerStubInjector.swift */; };
+		5A5FAA0429846549000580D4 /* ReposListAssemblerStubInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FAA0229846549000580D4 /* ReposListAssemblerStubInjector.swift */; };
+		5A5FAA0529846549000580D4 /* ReposListAssemblerStubInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FAA0229846549000580D4 /* ReposListAssemblerStubInjector.swift */; };
+		5A5FAA0729846577000580D4 /* NetworkingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FAA0629846577000580D4 /* NetworkingStub.swift */; };
+		5A5FAA0829846577000580D4 /* NetworkingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FAA0629846577000580D4 /* NetworkingStub.swift */; };
+		5A5FAA0929846577000580D4 /* NetworkingStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FAA0629846577000580D4 /* NetworkingStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +114,8 @@
 		5A58293D2705547B007CAB8F /* ReposListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReposListTableViewCell.xib; sourceTree = "<group>"; };
 		5A582942270561BF007CAB8F /* PaginationDataTaskWebOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationDataTaskWebOperation.swift; sourceTree = "<group>"; };
 		5A5829462705620B007CAB8F /* WebOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebOperation.swift; sourceTree = "<group>"; };
+		5A5FAA0229846549000580D4 /* ReposListAssemblerStubInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposListAssemblerStubInjector.swift; sourceTree = "<group>"; };
+		5A5FAA0629846577000580D4 /* NetworkingStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingStub.swift; sourceTree = "<group>"; };
 		7B55AD829FBEA8029CB5EFB7 /* Pods-DI_SampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DI_SampleTests.debug.xcconfig"; path = "Target Support Files/Pods-DI_SampleTests/Pods-DI_SampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +180,7 @@
 			children = (
 				5A5828DE270495B7007CAB8F /* AppDelegate.swift */,
 				5A58291B2704A42A007CAB8F /* ReposListAssembler.swift */,
+				5A5FAA0A29846E79000580D4 /* Stubs */,
 				5A582927270514F5007CAB8F /* MVP */,
 				5A58292827051577007CAB8F /* NetworkPump */,
 				5A5828E4270495B7007CAB8F /* Main.storyboard */,
@@ -223,14 +232,12 @@
 		5A58292827051577007CAB8F /* NetworkPump */ = {
 			isa = PBXGroup;
 			children = (
-				5A5829462705620B007CAB8F /* WebOperation.swift */,
-				5A582942270561BF007CAB8F /* PaginationDataTaskWebOperation.swift */,
+				5A5FA9FE2984375E000580D4 /* EndPoints */,
+				5A5FA9FF29843783000580D4 /* Operations */,
 				5A582923270507BF007CAB8F /* DataParser.swift */,
 				5A58291F270507B2007CAB8F /* Networking.swift */,
-				5A58292D27051C6A007CAB8F /* RepoResponse.swift */,
-				5A582929270516D7007CAB8F /* ReposesEndPoint.swift */,
-				5A38FEB229832A2400665D01 /* EndPoint.swift */,
 				5A58293127051E66007CAB8F /* Response.swift */,
+				5A58292D27051C6A007CAB8F /* RepoResponse.swift */,
 				5A58293527052288007CAB8F /* Error.swift */,
 			);
 			path = NetworkPump;
@@ -243,6 +250,33 @@
 				5A58293D2705547B007CAB8F /* ReposListTableViewCell.xib */,
 			);
 			path = ReposListTableViewCell;
+			sourceTree = "<group>";
+		};
+		5A5FA9FE2984375E000580D4 /* EndPoints */ = {
+			isa = PBXGroup;
+			children = (
+				5A582929270516D7007CAB8F /* ReposesEndPoint.swift */,
+				5A38FEB229832A2400665D01 /* EndPoint.swift */,
+			);
+			path = EndPoints;
+			sourceTree = "<group>";
+		};
+		5A5FA9FF29843783000580D4 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				5A5829462705620B007CAB8F /* WebOperation.swift */,
+				5A582942270561BF007CAB8F /* PaginationDataTaskWebOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		5A5FAA0A29846E79000580D4 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				5A5FAA0229846549000580D4 /* ReposListAssemblerStubInjector.swift */,
+				5A5FAA0629846577000580D4 /* NetworkingStub.swift */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 		EFC63CF1D5BCD7D4BAEBB50B /* Pods */ = {
@@ -416,6 +450,7 @@
 				5A5828E3270495B7007CAB8F /* ReposListVC.swift in Sources */,
 				5A58292A270516D7007CAB8F /* ReposesEndPoint.swift in Sources */,
 				5A582943270561BF007CAB8F /* PaginationDataTaskWebOperation.swift in Sources */,
+				5A5FAA0729846577000580D4 /* NetworkingStub.swift in Sources */,
 				5A5828DF270495B7007CAB8F /* AppDelegate.swift in Sources */,
 				5A582910270499E9007CAB8F /* Storyboarded.swift in Sources */,
 				5A58293627052288007CAB8F /* Error.swift in Sources */,
@@ -426,6 +461,7 @@
 				5A38FEB329832A2400665D01 /* EndPoint.swift in Sources */,
 				5A58293A2705546B007CAB8F /* ReposListTableViewCell.swift in Sources */,
 				5A58291427049EC3007CAB8F /* ReposListPresenter.swift in Sources */,
+				5A5FAA0329846549000580D4 /* ReposListAssemblerStubInjector.swift in Sources */,
 				5A582920270507B2007CAB8F /* Networking.swift in Sources */,
 				5A58292E27051C6A007CAB8F /* RepoResponse.swift in Sources */,
 				5A5829472705620B007CAB8F /* WebOperation.swift in Sources */,
@@ -439,7 +475,9 @@
 				5A58291527049EC3007CAB8F /* ReposListPresenter.swift in Sources */,
 				5A58292B270516D7007CAB8F /* ReposesEndPoint.swift in Sources */,
 				5A58293727052288007CAB8F /* Error.swift in Sources */,
+				5A5FAA0429846549000580D4 /* ReposListAssemblerStubInjector.swift in Sources */,
 				5A5829192704A07B007CAB8F /* RepoModel.swift in Sources */,
+				5A5FAA0829846577000580D4 /* NetworkingStub.swift in Sources */,
 				5A582944270561BF007CAB8F /* PaginationDataTaskWebOperation.swift in Sources */,
 				5A58293327051E66007CAB8F /* Response.swift in Sources */,
 				5A582921270507B2007CAB8F /* Networking.swift in Sources */,
@@ -460,7 +498,9 @@
 				5A58291627049EC3007CAB8F /* ReposListPresenter.swift in Sources */,
 				5A58292C270516D7007CAB8F /* ReposesEndPoint.swift in Sources */,
 				5A58293827052288007CAB8F /* Error.swift in Sources */,
+				5A5FAA0529846549000580D4 /* ReposListAssemblerStubInjector.swift in Sources */,
 				5A58291A2704A07B007CAB8F /* RepoModel.swift in Sources */,
+				5A5FAA0929846577000580D4 /* NetworkingStub.swift in Sources */,
 				5A582945270561BF007CAB8F /* PaginationDataTaskWebOperation.swift in Sources */,
 				5A58293427051E66007CAB8F /* Response.swift in Sources */,
 				5A582922270507B2007CAB8F /* Networking.swift in Sources */,
@@ -639,6 +679,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ababagalamaga.DI-Sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -658,6 +699,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ababagalamaga.DI-Sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

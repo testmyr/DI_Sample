@@ -37,7 +37,7 @@ class ReposListPresenter {
         let _ = dataPump.fetch(pageWithIndex: 1) { [weak self] response in
             if let self {
                 if let newlyFetchedModels = response?.reposes {
-                    self.pageIndex = 0
+                    self.pageIndex = 1
                     if newlyFetchedModels.count > 0 {
                         self.models = newlyFetchedModels.map({RepoModel(name: $0.name, description: $0.description)})
                         self.isEndOfReposes = newlyFetchedModels.count < self.pageSize
@@ -46,8 +46,11 @@ class ReposListPresenter {
                         self.view?.showErrorAlert(errorText: "No repositories.")
                         self.isEndOfReposes = true
                     }
-                } else if let errorInfo = response?.errorMessage {
-                    self.view?.showErrorAlert(errorText: errorInfo.message)
+                } else {
+                    if let errorInfo = response?.errorMessage {
+                        self.view?.showErrorAlert(errorText: errorInfo.message)
+                    }
+                    self.pageIndex = 0
                 }
                 completion?()
             }
@@ -77,8 +80,11 @@ class ReposListPresenter {
                     } else {
                         self.isEndOfReposes = true
                     }
-                } else if let errorInfo = response?.errorMessage {
-                    self.view?.showErrorAlert(errorText: errorInfo.message)
+                } else {
+                    if let errorInfo = response?.errorMessage {
+                        self.view?.showErrorAlert(errorText: errorInfo.message)
+                    }
+                    self.pageIndex = self.pageIndex - 1
                 }
             }
         }

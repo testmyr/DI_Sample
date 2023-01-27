@@ -8,6 +8,6 @@
 import Foundation
 
 struct RepoModel {
-    var name: String
-    var description: String?
+    let name: String
+    let description: String?
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response: Decodable {
+struct Response: Codable {
   let reposes: [RepoResponse]?
   let errorMessage: ErrorInfo?
     

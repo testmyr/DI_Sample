@@ -22,7 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = window else {
             return
         }
+        #if STUBS
+        let assembler = ReposListAssemblerStubInjector()
+        #else
         let assembler = ReposListAssemblerInjector()
+        #endif
         let reposView = assembler.resolve()
         window.rootViewController = reposView
         window.makeKeyAndVisible()

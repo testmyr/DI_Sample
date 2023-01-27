@@ -14,4 +14,9 @@ struct RepoResponse: Codable {
     private enum CodingKeys: String, CodingKey {
         case name, description
     }
+    
+    init(name: String, description: String) {
+        self.name = name
+        self.description = description
+    }
 }
