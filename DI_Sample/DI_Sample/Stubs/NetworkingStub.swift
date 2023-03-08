@@ -24,6 +24,8 @@ class NetworkingStub: NetworkingProtocol {
             return
         }
         DispatchQueue.global(qos: .userInitiated).async {
+            let delay = Double.random(in: 0.5...2.5)
+            Thread.sleep(forTimeInterval: delay)
             completion(data, true)
         }
     }
