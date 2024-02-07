@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol NetworkingProtocol {
-    typealias CompletionHandler = (Data?, Bool) -> Void
-    func requestReposPage(withSize pageSize: Int, andIndex pageIndex: Int, completion: @escaping CompletionHandler)
-}
-
 class Networking: NetworkingProtocol {
     private let timeoutInterval: TimeInterval = 10
     private let initialPage = 1

@@ -7,6 +7,9 @@
 
 import Foundation
 
+protocol DataProviderReposesProtocol {
+    func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void)
+}
 
 protocol ReposListVCProtocol: AnyObject {
     func updateView()
@@ -22,7 +25,7 @@ class ReposListPresenter {
         return models.count
     }
     private(set) var models = [RepoModel]()
-    private let dataPump: DataProviderProtocol
+    private let dataPump: DataProviderReposesProtocol
     
     private let pageSize: Int
     private var pageIndex = 0

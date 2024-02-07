@@ -9,11 +9,7 @@ import Foundation
 
 import Foundation
 
-protocol DataProviderProtocol {
-    func fetch(pageWithIndex pageIndex: Int, response: @escaping (Response?) -> Void)
-}
-
-class DataParser: DataProviderProtocol {
+class DataParser: DataProviderReposesProtocol {
     private let networking: NetworkingProtocol
     
     private let pageSize: Int

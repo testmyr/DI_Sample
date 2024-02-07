@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol NetworkingProtocol {
+    typealias CompletionHandler = (Data?, Bool) -> Void
+    func requestReposPage(withSize pageSize: Int, andIndex pageIndex: Int, completion: @escaping CompletionHandler)
+}
+
 protocol ReposListAssemblerProtocol {
     func resolve(org: String) -> ReposListVC
     func resolve(org: String, view: ReposListVCProtocol) -> ReposListPresenter
